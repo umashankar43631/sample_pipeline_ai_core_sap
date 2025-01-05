@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: WorkflowTemplate
+metadata:
+  name: imgpowerline-identifying-pipeline # executable id, must be unique across all your workflows (YAML files), please modify this to any value (e.g. code-pipeline-12345) if you are not the only user of your SAP AI Core instance.
+  annotations:
+    scenarios.ai.sap.com/description: "add custom code to SAP AI Core"
+    scenarios.ai.sap.com/name: "powerlinedetector"
+    executables.ai.sap.com/description: "Trains model on identifying the power lines in the image"
+    executables.ai.sap.com/name: "powerlinedetector"
+  labels:
+    scenarios.ai.sap.com/id: "powerlinedetector"
+    ai.sap.com/version: "1.0"
+spec:
+  imagePullSecrets:
+    - name: newpowerlinesnearveg # your docker registry secret
+  entrypoint: mylinepipeline
+  templates:
+  - name: mylinepipeline
+    steps:
+    - - name: linesdetector
+        template: mycodeblock1
+  - name: mycodeblock1
+    container:
+      image: docker push umashankar8331/yolov_model_liens_detection:1.0
+      command: ["/bin/sh", "-c"]
+      args:
+        - "python train.py"
