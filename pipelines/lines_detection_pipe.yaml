@@ -9,7 +9,7 @@ metadata:
     executables.ai.sap.com/name: "powerlinedetector"
   labels:
     scenarios.ai.sap.com/id: "powerlinedetector"
-    ai.sap.com/version: "1.0"
+    ai.sap.com/version: "1.1"
 spec:
   imagePullSecrets:
     - name: newpowerlinesnearveg # your docker registry secret
@@ -21,7 +21,7 @@ spec:
         template: mycodeblock1
   - name: mycodeblock1
     container:
-      image: docker push umashankar8331/yolov_model_liens_detection:1.0
+      image: docker push umashankar8331/yolov_model_liens_detection:1.5
       command: ["/bin/sh", "-c"]
       args:
         - "python train.py"
