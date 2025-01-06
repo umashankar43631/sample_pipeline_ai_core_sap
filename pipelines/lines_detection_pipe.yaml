@@ -21,7 +21,7 @@ spec:
         template: mycodeblock1
   - name: mycodeblock1
     container:
-      image: docker push umashankar8331/yolov_model_liens_detection:1.5
+      image: docker push umashankar8331/yolov_model_liens_detection:1.6
       command: ["/bin/sh", "-c"]
       args:
         - "python train.py"
